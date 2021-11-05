@@ -4,7 +4,7 @@ import { useHistory } from "react-router-dom";
 
 
 function LoginForm({login}) {
-  const INITIAL_STATE = {username: "woody", password: "123456"}
+  const INITIAL_STATE = {username: "", password: ""}
   const [formData, handleChange, resetFormData] = useFields(INITIAL_STATE)
   const history = useHistory()
 
