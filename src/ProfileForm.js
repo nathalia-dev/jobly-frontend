@@ -8,16 +8,19 @@ import { Redirect, useHistory } from "react-router";
 function ProfileForm() {
 
   const {currentUser, setCurrentUser} = useContext(CurrentUserContext)
-  //QUESTION: how to do this initial_state? If a let just currentUser.key returns an error when I refresh the page.
   const [formData, handleChange, resetFormData] = useFields({firstName: currentUser? currentUser.firstName : "" , lastName: currentUser? currentUser.lastName : "" , email: currentUser? currentUser.email : "" })
   const history = useHistory();
 
   async function handleSubmit(e) {
     e.preventDefault();
     const res = await JoblyApi.updateUser(formData, currentUser.username);
-    setCurrentUser(await JoblyApi.getUser(currentUser.username));
-    resetFormData();
-    history.push("/")
+    if (Array.isArray(res)) {
+      alert("Please, do not leave any field blank.")
+    } else {
+      setCurrentUser(await JoblyApi.getUser(currentUser.username));
+      resetFormData();
+      history.push("/")
+    }
   }
 
   function userIsLoggedIn() {

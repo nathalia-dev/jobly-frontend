@@ -95,8 +95,13 @@ class JoblyApi {
   }
 
   static async updateUser(profileFormData, username) {
-    let res =  await this.request(`users/${username}`, profileFormData, "patch")
-    return res.user
+    try {
+      let res =  await this.request(`users/${username}`, profileFormData, "patch")
+      return res.user
+    } catch (e) {
+      return e
+    }
+
   }
 
   static async userApplyForJob (username, jobId) {
@@ -106,15 +111,4 @@ class JoblyApi {
 
 }
 
-// for now, put token ("testuser" / "password" on class)
-// JoblyApi.token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZ" +
-//     "SI6InRlc3R1c2VyIiwiaXNBZG1pbiI6ZmFsc2UsImlhdCI6MTU5ODE1OTI1OX0." +
-//     "FtrMwBQwe6Ue-glIFgz_Nf8XxRT2YecFCiSpYL0fCXc";
-// JoblyApi.token = "kjskdjlsjdklsjdlskjd"
-
-    // {
-      // "username": "woody",
-      // "password": "123456",
-    //   "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Indvb2R5IiwiaXNBZG1pbiI6ZmFsc2UsImlhdCI6MTYzNDMxOTUwN30.lfOyd0V1SlQf8-nu9WkSkvj169_cZo0R3qaKRzLdA4I"
-    // }    
 export default JoblyApi

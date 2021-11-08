@@ -10,7 +10,7 @@ import CurrentUserContext from "./CurrentUserContext";
 function App() {
 	const [token, setToken] = useLocalStorage("token");
 	const [currentUser, setCurrentUser] = useState(undefined);
-	console.log(currentUser)
+
 	async function login(loginFormData) {
 		const userToken = await JoblyApi.login(loginFormData);
 		if (Array.isArray(userToken)) {
