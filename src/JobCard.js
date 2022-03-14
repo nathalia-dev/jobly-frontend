@@ -4,12 +4,11 @@ import JoblyApi from "./api";
 
 function JobCard({ job }) {
 	const { currentUser, setCurrentUser } = useContext(CurrentUserContext);
-	const [userApplications, setUserApplications] = useState(currentUser.applications);
 	const [applied, setApplied] = useState(false);
 
-
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	function hasUserAppliedForThisJob() {
-		if (userApplications.indexOf(job.id) !== -1) {
+		if (currentUser.applications.indexOf(job.id) !== -1) {
 			setApplied(true);
 		} else {
 			setApplied(false);
@@ -18,12 +17,11 @@ function JobCard({ job }) {
 
 	useEffect(() => {
 		hasUserAppliedForThisJob();
-	}, [userApplications]);
+	}, [hasUserAppliedForThisJob]);
 
 	async function applyForJob() {
 
 		const res = await JoblyApi.userApplyForJob(currentUser.username, job.id);
-		setUserApplications(item => [res.applied,...item])
 		setCurrentUser(await JoblyApi.getUser(currentUser.username));
 
 	}

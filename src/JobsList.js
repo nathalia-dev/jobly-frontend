@@ -9,20 +9,23 @@ import CurrentUserContext from "./CurrentUserContext";
 function JobsList() {
   const [jobs, setJobs] = useState([])
   const [formData, handleChange, resetFormData] = useFields({title: ""})
-  const currentUser = useContext(CurrentUserContext)
+  const currentUser = useContext(CurrentUserContext);
+
 
   async function fetchData(formData) {
     setJobs(await JoblyApi.getJobs(formData))
   }
 
+
   useEffect (() => {
     fetchData(formData)
   }, [])
 
-  function handleSubmit (e) {
+  async function handleSubmit (e) {
     e.preventDefault();
     resetFormData()
     fetchData(formData)
+
   }
 
   function isUserLoggedIn() {

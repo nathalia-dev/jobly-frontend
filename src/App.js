@@ -33,6 +33,10 @@ function App() {
 		setToken(null)
 	}
 
+	/* Function that verifies if there is a token. 
+	** If it does, the currentUser will be the user provided by the token. 
+	** If it doenst have a token, the currentUser will be set to null 
+	*/
 	async function changeCurrentUserState() {
 		if (token) {
 			const username = jwt.decode(token).username;

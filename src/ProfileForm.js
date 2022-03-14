@@ -15,6 +15,7 @@ function ProfileForm() {
     e.preventDefault();
     const res = await JoblyApi.updateUser(formData, currentUser.username);
     if (Array.isArray(res)) {
+      console.log(res)
       alert("Please, do not leave any field blank.")
     } else {
       setCurrentUser(await JoblyApi.getUser(currentUser.username));
@@ -57,7 +58,7 @@ function ProfileForm() {
               <input type="email" id="email" name="email" value={formData.email} onChange={handleChange} className="form-control"></input>
             </div>
           </div>
-
+          
           <button className="btn btn-primary my-3"> SAVE </button>
 
         </form>

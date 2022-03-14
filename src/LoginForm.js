@@ -12,8 +12,7 @@ function LoginForm({login}) {
     e.preventDefault()
     const apiRes = await login(formData)
     if (apiRes !== undefined) {
-      console.log(apiRes.data)
-      alert(apiRes.data)
+      alert(apiRes.error)
     } else {
       resetFormData()
       history.push("/")

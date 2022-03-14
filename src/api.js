@@ -5,8 +5,6 @@ const BASE_URL = process.env.REACT_APP_BASE_URL || "http://localhost:3001";
 /** API Class.
  *
  * Static class tying together methods used to get/send to to the API.
- * There shouldn't be any frontend-specific stuff here, and there shouldn't
- * be any API-aware stuff elsewhere in the frontend.
  *
  */
 
@@ -17,8 +15,6 @@ class JoblyApi {
   static async request(endpoint, data = {}, method = "get") {
     console.debug("API Call:", endpoint, data, method);
 
-    //there are multiple ways to pass an authorization token, this is how you pass it in the header.
-    //this has been provided to show you another way to pass the token. you are only expected to read this code for this project.
     const url = `${BASE_URL}/${endpoint}`;
     const headers = { Authorization: `Bearer ${JoblyApi.token}` };
     const params = (method === "get")
@@ -58,6 +54,8 @@ class JoblyApi {
 
   }
 
+   /** Get all jobs. It is possible to pass a filter by job title. */
+
   static async getJobs({title}) {
     let res;
     if (title.length) {
@@ -69,6 +67,8 @@ class JoblyApi {
     return res.jobs
   }
 
+   /** Post request to do the login */
+
   static async login(loginFormData) {
     try {
       let res = await this.request(`auth/token`, loginFormData, "post")
@@ -78,6 +78,8 @@ class JoblyApi {
     }
 
   }
+
+   /** Post request to register a new user */
 
   static async signUp(signUpFormData) {
     try {
@@ -89,10 +91,15 @@ class JoblyApi {
 
   }
 
+   /** Get an user by username . */
+
   static async getUser(username) {
     let res = await this.request(`users/${username}`)
     return res.user
   }
+
+
+  /** Update the user profile . */
 
   static async updateUser(profileFormData, username) {
     try {
@@ -103,6 +110,8 @@ class JoblyApi {
     }
 
   }
+
+  /** Post request to apply for a job  */
 
   static async userApplyForJob (username, jobId) {
     let res = await this.request(`users/${username}/jobs/${jobId}`, {}, "post")
