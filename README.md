@@ -4,7 +4,7 @@
 
 jobly-backend is the backend part of Jobly: A full stack application that shows jobs oportunities and enable the user to apply for them. Also, it provides information about each company that is offering a job.
 
-for jobly-frontend, please click [here](https://github.com/nathalia-dev/jobly-backend).
+for jobly-backtend, please click [here](https://github.com/nathalia-dev/jobly-backend).
 
 ## Project Motivation
 
